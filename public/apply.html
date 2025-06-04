@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Apply Now - Debt Relief</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+    }
+    .apply-container {
+      max-width: 420px;
+      margin: 60px auto;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 4px 24px rgba(78, 84, 200, 0.10);
+      padding: 32px 28px 28px 28px;
+      text-align: center;
+    }
+    .apply-container h1 {
+      font-size: 2rem;
+      color: #4e54c8;
+      margin-bottom: 18px;
+      font-weight: 600;
+    }
+    .apply-container p {
+      color: #444;
+      font-size: 1.1rem;
+      margin-bottom: 28px;
+    }
+    .apply-form label {
+      display: block;
+      text-align: left;
+      margin-bottom: 6px;
+      color: #4e54c8;
+      font-weight: 500;
+    }
+    .apply-form select,
+    .apply-form input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 18px;
+      border: 1.5px solid #c3cfe2;
+      border-radius: 8px;
+      font-size: 1rem;
+      background: #f5f7fa;
+      transition: border 0.2s;
+    }
+    .apply-form select:focus,
+    .apply-form input:focus {
+      border: 1.5px solid #4e54c8;
+      outline: none;
+    }
+    .apply-form button {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(90deg, #4e54c8 0%, #8f94fb 100%);
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      margin-top: 8px;
+    }
+    .apply-form button:hover {
+      background: linear-gradient(90deg, #8f94fb 0%, #4e54c8 100%);
+      transform: translateY(-2px) scale(1.03);
+    }
+  </style>
+</head>
+<body>
+  <div class="apply-container">
+    <h1>Apply for Debt Relief</h1>
+    <p>Fill out this simple form to see if you qualify for debt relief. Our team will contact you for a free consultation.</p>
+    <form class="apply-form">
+      <label for="debt-amount">Debt Amount</label>
+      <select id="debt-amount" name="debt-amount" required>
+        <option value="">Select Debt Amount</option>
+        <option value="$0-$4,999">$0 – $4,999</option>
+        <option value="$5,000-$9,999">$5,000 – $9,999</option>
+        <option value="$10,000-$19,999">$10,000 – $19,999</option>
+        <option value="$20,000-$49,999">$20,000 – $49,999</option>
+        <option value="$50,000+">$50,000+</option>
+      </select>
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" placeholder="Your Name" required />
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" name="phone" placeholder="Your Phone Number" required />
+      <button type="submit">Apply Now</button>
+    </form>
+  </div>
+</body>
+</html>
