@@ -1,98 +1,380 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Apply Now - Debt Relief</title>
+  <meta charset="UTF-8" />
+  <title>Multi-Step Debt Inquiry Form</title>
   <style>
+    * { box-sizing: border-box; }
+    html, body {
+      height: 100%; margin: 0; font-family: Arial, sans-serif;
+    }
     body {
-      margin: 0;
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-      min-height: 100vh;
+      display: flex; background: #002855; justify-content: center; align-items: center;
     }
-    .apply-container {
-      max-width: 420px;
-      margin: 60px auto;
-      background: #fff;
-      border-radius: 18px;
-      box-shadow: 0 4px 24px rgba(78, 84, 200, 0.10);
-      padding: 32px 28px 28px 28px;
-      text-align: center;
+    .container {
+      background: white;
+      width: 80%; max-width: 900px;
+      min-height: 600px;
+      border-radius: 15px;
+      overflow: hidden;
+      display: flex;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     }
-    .apply-container h1 {
-      font-size: 2rem;
-      color: #4e54c8;
-      margin-bottom: 18px;
-      font-weight: 600;
+    .image-side {
+      flex: 1;
+      background: url('Media/applynow.png') center/cover no-repeat;
     }
-    .apply-container p {
-      color: #444;
-      font-size: 1.1rem;
-      margin-bottom: 28px;
+    .form-side {
+      flex: 1;
+      padding: 40px;
+      position: relative;
     }
-    .apply-form label {
+    .form-page {
+      display: none;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    .form-page.active {
       display: block;
-      text-align: left;
-      margin-bottom: 6px;
-      color: #4e54c8;
-      font-weight: 500;
     }
-    .apply-form select,
-    .apply-form input {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 18px;
-      border: 1.5px solid #c3cfe2;
-      border-radius: 8px;
-      font-size: 1rem;
-      background: #f5f7fa;
-      transition: border 0.2s;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateX(20px); }
+      to { opacity: 1; transform: translateX(0); }
     }
-    .apply-form select:focus,
-    .apply-form input:focus {
-      border: 1.5px solid #4e54c8;
-      outline: none;
+    label { display: block; margin: 15px 0 5px; font-weight: bold; }
+    input, select, textarea {
+      width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;
     }
-    .apply-form button {
-      width: 100%;
-      padding: 14px;
-      background: linear-gradient(90deg, #4e54c8 0%, #8f94fb 100%);
-      color: #fff;
-      font-size: 1.1rem;
-      font-weight: 600;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.2s;
-      margin-top: 8px;
+    .checkbox-group label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
     }
-    .apply-form button:hover {
-      background: linear-gradient(90deg, #8f94fb 0%, #4e54c8 100%);
-      transform: translateY(-2px) scale(1.03);
+    .buttons {
+      margin-top: 20px; display: flex; justify-content: space-between;
     }
+    button {
+      padding: 10px 20px; border: none; border-radius: 5px;
+      cursor: pointer; font-weight: bold;
+    }
+    .next-btn { background: #4b38d3; color: white; }
+    .back-btn { background: #ccc; }
+
+.radio-option input[type="checkbox"] {
+  opacity: 0;
+  position: absolute;
+  right: 16px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 6px 0;
+}
+.radio-option span:last-child {
+  font-weight: bold;
+}
+
+.custom-radio {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #000000;
+  border-radius: 6px; /* square for checkbox */
+  display: inline-block;
+  position: relative;
+  background: #fff;
+  margin-left: 12px;
+  transition: border-color 0.2s;
+}
+
+.radio-option input[type="checkbox"]:checked + .custom-radio {
+  border-color: #000000;
+  background: #000000;
+}
+
+.radio-option input[type="checkbox"]:checked + .custom-radio::after {
+  content: '';
+  display: block;
+  width: 10px;
+  height: 10px;
+  background: #000000;
+  border-radius: 2px;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+}
+
+.radio-option input[type="checkbox"]:focus + .custom-radio {
+  outline: 2px solid #ffffff;
+}
+
+.radio-option input[type="checkbox"]:checked ~ .custom-radio,
+.radio-option:hover {
+  background: #fff7f7;
+}
+.radio-box-group {
+  border: 2px solid #222;
+  border-radius: 10px;
+  background: #f7f7ff;
+  padding: 18px 20px;
+  margin-bottom: 24px;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.radio-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: normal;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 6px 0;
+}
+
+.radio-row input[type="radio"] {
+  accent-color: #4b38d3;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+}
+
   </style>
 </head>
 <body>
-  <div class="apply-container">
-    <h1>Apply for Debt Relief</h1>
-    <p>Fill out this simple form to see if you qualify for debt relief. Our team will contact you for a free consultation.</p>
-    <form class="apply-form">
-      <label for="debt-amount">Debt Amount</label>
-      <select id="debt-amount" name="debt-amount" required>
-        <option value="">Select Debt Amount</option>
-        <option value="$0-$4,999">$0 – $4,999</option>
-        <option value="$5,000-$9,999">$5,000 – $9,999</option>
-        <option value="$10,000-$19,999">$10,000 – $19,999</option>
-        <option value="$20,000-$49,999">$20,000 – $49,999</option>
-        <option value="$50,000+">$50,000+</option>
+  <form id="multiStepForm" class="container">
+    <div class="image-side"></div>
+    <div class="form-side">
+
+      <!-- Page 1 -->
+      <div class="form-page active" id="page1">
+        <label>First Name*</label>
+        <input type="text" name="firstName" required />
+
+        <label>Last Name*</label>
+        <input type="text" name="lastName" required />
+
+        <label>Email*</label>
+        <input type="email" name="email" required />
+
+        <label>Phone Number*</label>
+          <div style="display: flex; gap: 8px;">
+            <select name="countryCode" id="countryCode" required style="max-width: 110px;">
+              <option value="" disabled selected>Select</option>
+              <option value="+1" data-length="10">+1 (USA)</option>
+            </select>
+            <input type="tel" name="phone" id="phoneInput" required maxlength="10" placeholder="Enter phone number" style="flex:1;" />
+          </div>
+
+        <label>State*</label>
+        <select name="state" required>
+          <option value="">Select State</option>
+          <option value="AL">Alabama</option><option value="AK">Alaska</option><option value="AZ">Arizona</option><option value="AR">Arkansas</option>
+          <option value="CA">California</option><option value="CO">Colorado</option><option value="CT">Connecticut</option><option value="DE">Delaware</option>
+          <option value="FL">Florida</option><option value="GA">Georgia</option><option value="HI">Hawaii</option><option value="ID">Idaho</option>
+          <option value="IL">Illinois</option><option value="IN">Indiana</option><option value="IA">Iowa</option><option value="KS">Kansas</option>
+          <option value="KY">Kentucky</option><option value="LA">Louisiana</option><option value="ME">Maine</option><option value="MD">Maryland</option>
+          <option value="MA">Massachusetts</option><option value="MI">Michigan</option><option value="MN">Minnesota</option><option value="MS">Mississippi</option>
+          <option value="MO">Missouri</option><option value="MT">Montana</option><option value="NE">Nebraska</option><option value="NV">Nevada</option>
+          <option value="NH">New Hampshire</option><option value="NJ">New Jersey</option><option value="NM">New Mexico</option><option value="NY">New York</option>
+          <option value="NC">North Carolina</option><option value="ND">North Dakota</option><option value="OH">Ohio</option><option value="OK">Oklahoma</option>
+          <option value="OR">Oregon</option><option value="PA">Pennsylvania</option><option value="RI">Rhode Island</option><option value="SC">South Carolina</option>
+          <option value="SD">South Dakota</option><option value="TN">Tennessee</option><option value="TX">Texas</option><option value="UT">Utah</option>
+          <option value="VT">Vermont</option><option value="VA">Virginia</option><option value="WA">Washington</option><option value="WV">West Virginia</option>
+          <option value="WI">Wisconsin</option><option value="WY">Wyoming</option>
+        </select>
+        <div class="buttons">
+          <span></span>
+          <button type="button" class="next-btn" onclick="nextPage(1)">Next</button>
+        </div>
+      </div>
+
+      <!-- Page 2 -->
+     <div class="form-page" id="page2">
+      <label>Debt Amount*</label>
+      <select name="debtAmount" required>
+        <option value="">Select Amount</option>
+        <option>$1k–$5k</option>
+        <option>$5k–$10k</option>
+        <option>$10k–$20k</option>
+        <option>$20k–$50k</option>
+        <option>$50k–$100k</option>
+        <option>$100k+</option>
       </select>
-      <label for="name">Full Name</label>
-      <input type="text" id="name" name="name" placeholder="Your Name" required />
-      <label for="phone">Phone Number</label>
-      <input type="tel" id="phone" name="phone" placeholder="Your Phone Number" required />
-      <button type="submit">Apply Now</button>
-    </form>
-  </div>
+
+      <label>Type of Debt*</label>
+        <div id="debtTypes" class="radio-box-group">
+        <label class="radio-option">
+          <input type="checkbox" name="typeOfDebt[]" value="Credit Cards" />
+          <span class="custom-radio"></span>
+          <span>Credit Cards</span>
+        </label>
+        <label class="radio-option">
+          <input type="checkbox" name="typeOfDebt[]" value="Loans" />
+          <span class="custom-radio"></span>
+          <span>Loans</span>
+        </label>
+        <label class="radio-option">
+          <input type="checkbox" name="typeOfDebt[]" value="Medical" />
+          <span class="custom-radio"></span>
+          <span>Medical</span>
+        </label>
+      </div>
+
+       <label>Employment Status*</label>
+        <select name="employmentStatus" required>
+          <option value="" disabled selected hidden>Select Employment Status</option>
+          <option>Employed</option>
+          <option>Unemployed</option>
+          <option>Self-employed</option>
+        </select>
+
+        <label>Monthly Income*</label>
+        <input type="number" name="monthlyIncome" required />
+
+        <div class="buttons">
+          <button type="button" class="back-btn" onclick="prevPage(2)">Back</button>
+          <button type="button" class="next-btn" onclick="nextPage(2)">Next</button>
+        </div>
+      </div>
+
+      <!-- Page 3 -->
+      <div class="form-page" id="page3">
+        <label>Source*</label>
+          <div class="radio-box-group">
+            <label class="radio-row">
+              <input type="radio" name="source" value="Facebook" />
+              <span>Facebook</span>
+            </label>
+            <label class="radio-row">
+              <input type="radio" name="source" value="Google" />
+              <span>Google</span>
+            </label>
+            <label class="radio-row">
+              <input type="radio" name="source" value="Referral" />
+              <span>Referral</span>
+            </label>
+          </div>
+
+          
+
+          <label>Status*</label>
+          <div class="radio-box-group">
+            <label class="radio-row">
+              <input type="radio" name="status" value="New Client" />
+              <span>New User</span>
+            </label>
+            <label class="radio-row">
+              <input type="radio" name="status" value="Current Client" />
+              <span>Current Client</span>
+            </label>
+            <label class="radio-row">
+              <input type="radio" name="status" value="Previous Client" />
+              <span>Previous Client</span>
+            </label>
+          </div>
+
+        <label>Comments</label>
+        <textarea name="notes" placeholder="Leave Your Comment"></textarea>
+
+        <div class="buttons">
+          <button type="button" class="back-btn" onclick="prevPage(3)">Back</button>
+          <button type="submit" class="next-btn">Submit</button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <script>
+    const pages = document.querySelectorAll('.form-page');
+    function showPage(n) {
+      pages.forEach(p => p.classList.remove('active'));
+      pages[n - 1].classList.add('active');
+    }
+    function nextPage(n) {
+      const inputs = [...pages[n - 1].querySelectorAll('input, select')];
+      const valid = inputs.every(input => !input.required || input.value);
+      if (!valid) {
+        alert("Please fill all required fields.");
+        return;
+      }
+      showPage(n + 1);
+    }
+    function prevPage(n) {
+      showPage(n - 1);
+    }
+
+    document.getElementById('phoneInput').addEventListener('input', function (e) {
+      this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);
+    });
+
+    document.getElementById('multiStepForm').addEventListener('submit', function (e) {
+    function validateCheckboxGroup(name) {
+      const checkboxes = document.querySelectorAll(`input[name="${name}[]"]`);
+      return Array.from(checkboxes).some(c => c.checked);
+    }
+    // ...in your submit handler...
+    if (!validateCheckboxGroup('typeOfDebt') ||
+        !validateRadioGroup('source') ||
+        !validateRadioGroup('status'))
+   {
+      alert('Please select an option in all required groups.');
+      e.preventDefault();
+      return;
+    }
+    
+      alert("Form submitted!");
+    });
+    document.getElementById('countryCode').addEventListener('change', function () {
+  const selected = this.options[this.selectedIndex];
+  const length = selected.getAttribute('data-length') || 10;
+  const phoneInput = document.getElementById('phoneInput');
+  phoneInput.value = '';
+  phoneInput.maxLength = length;
+  phoneInput.placeholder = `Enter ${length}-digit phone number`;
+});
+
+document.getElementById('phoneInput').addEventListener('input', function (e) {
+  // Only allow numbers, up to the maxlength set by country code
+  this.value = this.value.replace(/[^0-9]/g, '').slice(0, this.maxLength);
+});
+function validateRadioGroup(name) {
+  const radios = document.querySelectorAll(`input[name="${name}"]`);
+  return Array.from(radios).some(r => r.checked);
+}
+
+document.getElementById('multiStepForm').addEventListener('submit', function (e) {
+  function validateCheckboxGroup(name) {
+    const checkboxes = document.querySelectorAll(`input[name="${name}[]"]`);
+    return Array.from(checkboxes).some(c => c.checked);
+  }
+  if (
+    !validateCheckboxGroup('typeOfDebt') ||
+    !validateRadioGroup('source') ||
+    !validateRadioGroup('status')
+  ) {
+    alert('Please select an option in all required groups.');
+    e.preventDefault();
+    return;
+  }
+
+  // Redirect to index.html after successful validation
+  e.preventDefault();
+  window.location.href = 'index.html';
+});
+
+  // Show confirmation and prevent actual submission for demo
+  e.preventDefault();
+  alert("Form submitted!");
+
+  </script>
 </body>
 </html>
